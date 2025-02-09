@@ -102,5 +102,7 @@ describe('Homework_19_1', () => {
         cy.get(registrationPopupFixtures.registerButton).click();
 
         cy.url().should('include', '/panel/garage');
+
+        cy.login(Cypress.env('uniqueEmail'), Cypress.env('user').password);
     });
 });

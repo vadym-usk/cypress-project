@@ -10,6 +10,6 @@ module.exports = defineConfig({
     responseTimeout: 30000,
     screenshotOnRunFailure: true,
     video: false,
-    setupNodeEvents(on, config) {}
+    setupNodeEvents(on, config) { }
   }
 });

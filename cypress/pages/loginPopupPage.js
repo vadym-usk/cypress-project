@@ -1,7 +1,7 @@
 import loginPopupFixtures from '../fixtures/loginPopupFixtures.json';
 
 class LoginPopupPage {
-    verifyLoginPopup(){
+    verifyLoginPopup() {
         cy.get(loginPopupFixtures.loginTitle).should('have.text', 'Log in');
         return this;
     }

@@ -1,7 +1,7 @@
 import registrationPopupFixtures from '../fixtures/registrationPopupFixtures.json';
 
 class RegistrationPopup {
-    verifyRegistrationPopup(){
+    verifyRegistrationPopup() {
         cy.get(registrationPopupFixtures.registrationTitle).should('have.text', 'Registration');
         return this;
     }
@@ -51,7 +51,7 @@ class RegistrationPopup {
         return this;
     }
 
-    clickTitle(){
+    clickTitle() {
         cy.get(registrationPopupFixtures.registrationTitle).click();
         return this;
     }

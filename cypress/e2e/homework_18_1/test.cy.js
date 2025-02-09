@@ -1,6 +1,5 @@
 describe('Homework_18_1', () => {
     beforeEach(() => {
-        Cypress.config('baseUrl', 'https://guest:welcome2qauto@qauto.forstudy.space');
         cy.visit('/');
         cy.fixture('qautoHomepageFixtures').as('selector');
     })

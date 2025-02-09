@@ -1,5 +1,5 @@
-import qautoHomepageFixtures from '../../fixtures/qautoHomepageFixtures.json';
-import registrationPopupFixtures from '../../fixtures/registrationPopupFixtures.json';
+import { qautoHomePage } from '../../pages/qautoHomePage';
+import { registrationPopup } from '../../pages/registrationPopupPage';
 
 describe('Homework_19_1', () => {
     beforeEach(() => {
@@ -12,13 +12,15 @@ describe('Homework_19_1', () => {
     })
 
     it('Check registration popup with empty fields', function () {
-        cy.get(qautoHomepageFixtures.Header.buttons.signUpButton).contains('Sign up').click();
-        cy.get(registrationPopupFixtures.nameInputField).clear();
-        cy.get(registrationPopupFixtures.lastNameInputField).clear();
-        cy.get(registrationPopupFixtures.emailInputField).clear();
-        cy.get(registrationPopupFixtures.passwordInputField).clear();
-        cy.get(registrationPopupFixtures.reEnterPasswordInputField).clear();
-        cy.get(registrationPopupFixtures.registrationTitle).click();
+        qautoHomePage
+            .clickSignUpButton();
+        registrationPopup.verifyRegistrationPopup()
+        registrationPopup.getName().clear();
+        registrationPopup.getLastName().clear();
+        registrationPopup.getEmail().clear();
+        registrationPopup.getPassword().clear();
+        registrationPopup.getReEnterPassword().clear();
+        registrationPopup.clickTitle()
 
         cy.contains('p', 'Name required');
         cy.contains('p', 'Last name required');
@@ -26,83 +28,96 @@ describe('Homework_19_1', () => {
         cy.contains('p', 'Password required');
         cy.contains('p', 'Re-enter password required');
 
-        cy.get(registrationPopupFixtures.registerButton).should('be.disabled');
-        cy.get(registrationPopupFixtures.nameInputField).should('have.css', 'border-color', 'rgb(220, 53, 69)');
-        cy.get(registrationPopupFixtures.lastNameInputField).should('have.css', 'border-color', 'rgb(220, 53, 69)');
-        cy.get(registrationPopupFixtures.emailInputField).should('have.css', 'border-color', 'rgb(220, 53, 69)');
-        cy.get(registrationPopupFixtures.passwordInputField).should('have.css', 'border-color', 'rgb(220, 53, 69)');
-        cy.get(registrationPopupFixtures.reEnterPasswordInputField).should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.getRegisterButton().should('be.disabled')
+        registrationPopup.getName().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.getLastName().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.getEmail().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.getPassword().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.getReEnterPassword().should('have.css', 'border-color', 'rgb(220, 53, 69)');
     });
 
     it('Check registration popup with wrong data', function () {
-        cy.get(qautoHomepageFixtures.Header.buttons.signUpButton).contains('Sign up').click();
-        cy.get(registrationPopupFixtures.nameInputField).clear().type(' фылаорыкуадка');
-        cy.get(registrationPopupFixtures.lastNameInputField).clear().type('флвоы аикуло ');
-        cy.get(registrationPopupFixtures.emailInputField).clear().type('testemail.com');
-        cy.get(registrationPopupFixtures.passwordInputField).clear().type('test');
-        cy.get(registrationPopupFixtures.reEnterPasswordInputField).clear().type('test');
-        cy.get(registrationPopupFixtures.registrationTitle).click();
+        qautoHomePage
+            .clickSignUpButton();
+        registrationPopup
+            .verifyRegistrationPopup()
+            .enterName(' фылаорыкуадка')
+            .enterLastName('флвоы аикуло ')
+            .enterEmail('testemail.com')
+            .enterPassword('test')
+            .reEnterPassword('test')
+            .clickTitle()
 
         cy.contains('p', 'Name is invalid');
         cy.contains('p', 'Last name is invalid');
         cy.contains('p', 'Email is incorrect');
         cy.contains('p', 'Password has to be from 8 to 15 characters long and contain at least one integer, one capital, and one small letter');
 
-        cy.get(registrationPopupFixtures.registerButton).should('be.disabled');
-        cy.get(registrationPopupFixtures.nameInputField).should('have.css', 'border-color', 'rgb(220, 53, 69)');
-        cy.get(registrationPopupFixtures.lastNameInputField).should('have.css', 'border-color', 'rgb(220, 53, 69)');
-        cy.get(registrationPopupFixtures.emailInputField).should('have.css', 'border-color', 'rgb(220, 53, 69)');
-        cy.get(registrationPopupFixtures.passwordInputField).should('have.css', 'border-color', 'rgb(220, 53, 69)');
-        cy.get(registrationPopupFixtures.reEnterPasswordInputField).should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.getRegisterButton().should('be.disabled')
+        registrationPopup.getName().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.getLastName().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.getEmail().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.getPassword().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.getReEnterPassword().should('have.css', 'border-color', 'rgb(220, 53, 69)');
     });
 
     it('Check registration popup with wrong length for Name, Last Name and Password fields', function () {
-        cy.get(qautoHomepageFixtures.Header.buttons.signUpButton).contains('Sign up').click();
-        cy.get(registrationPopupFixtures.nameInputField).clear().type('t');
-        cy.get(registrationPopupFixtures.lastNameInputField).clear().type('testLastNametestLastN');
-        cy.get(registrationPopupFixtures.emailInputField).clear().type(Cypress.env('uniqueEmail'));
-        cy.get(registrationPopupFixtures.passwordInputField).clear().type('1Gsd1Gsd1Gsd1Gsd');
-        cy.get(registrationPopupFixtures.reEnterPasswordInputField).clear().type('1Gsd1Gsd1Gsd1Gsd');
-        cy.get(registrationPopupFixtures.registrationTitle).click();
+        qautoHomePage
+            .clickSignUpButton();
+        registrationPopup
+            .verifyRegistrationPopup()
+            .enterName('t')
+            .enterLastName('testLastNametestLastN')
+            .enterEmail(Cypress.env('uniqueEmail'))
+            .enterPassword('1Gsd1Gsd1Gsd1Gsd')
+            .reEnterPassword('1Gsd1Gsd1Gsd1Gsd')
+            .clickTitle()
 
         cy.contains('p', 'Name has to be from 2 to 20 characters long');
         cy.contains('p', 'Last name has to be from 2 to 20 characters long');
         cy.contains('p', 'Password has to be from 8 to 15 characters long and contain at least one integer, one capital, and one small letter');
 
-        cy.get(registrationPopupFixtures.registerButton).should('be.disabled');
-        cy.get(registrationPopupFixtures.nameInputField).should('have.css', 'border-color', 'rgb(220, 53, 69)');
-        cy.get(registrationPopupFixtures.lastNameInputField).should('have.css', 'border-color', 'rgb(220, 53, 69)');
-        cy.get(registrationPopupFixtures.passwordInputField).should('have.css', 'border-color', 'rgb(220, 53, 69)');
-        cy.get(registrationPopupFixtures.reEnterPasswordInputField).should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.getRegisterButton().should('be.disabled')
+        registrationPopup.getName().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.getLastName().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.getPassword().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.getReEnterPassword().should('have.css', 'border-color', 'rgb(220, 53, 69)');
     });
 
     it('Check registration popup with not matched passwords', function () {
-        cy.get(qautoHomepageFixtures.Header.buttons.signUpButton).contains('Sign up').click();
-        cy.get(registrationPopupFixtures.nameInputField).clear().type(Cypress.env('user').name);
-        cy.get(registrationPopupFixtures.lastNameInputField).clear().type(Cypress.env('user').lastName);
-        cy.get(registrationPopupFixtures.emailInputField).clear().type(Cypress.env('uniqueEmail'));
-        cy.get(registrationPopupFixtures.passwordInputField).clear().type(Cypress.env('user').password, { sensitive: true });
-        cy.get(registrationPopupFixtures.reEnterPasswordInputField).clear().type(Cypress.env('user').password + '1', { sensitive: true });
-        cy.get(registrationPopupFixtures.registrationTitle).click();
+        qautoHomePage
+            .clickSignUpButton();
+        registrationPopup
+            .verifyRegistrationPopup()
+            .enterName(Cypress.env('user').name)
+            .enterLastName(Cypress.env('user').lastName)
+            .enterEmail(Cypress.env('uniqueEmail'))
+            .enterPassword(Cypress.env('user').password)
+            .reEnterPassword(Cypress.env('user').password + '1')
+            .clickTitle()
 
         cy.contains('p', 'Passwords do not match');
 
-        cy.get(registrationPopupFixtures.registerButton).should('be.disabled');
-        cy.get(registrationPopupFixtures.reEnterPasswordInputField).should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.getRegisterButton().should('be.disabled')
+        registrationPopup.getReEnterPassword().should('have.css', 'border-color', 'rgb(220, 53, 69)');
     });
 
     it('Check successfull registration', function () {
-        cy.get(qautoHomepageFixtures.Header.buttons.signUpButton).contains('Sign up').click();
-        cy.get(registrationPopupFixtures.registrationTitle).should('have.text', 'Registration');
-        cy.get(registrationPopupFixtures.nameInputField).clear().type(Cypress.env('user').name);
-        cy.get(registrationPopupFixtures.lastNameInputField).clear().type(Cypress.env('user').lastName);
-        cy.get(registrationPopupFixtures.emailInputField).clear().type(Cypress.env('uniqueEmail'));
-        cy.get(registrationPopupFixtures.passwordInputField).clear().type(Cypress.env('user').password, { sensitive: true });
-        cy.get(registrationPopupFixtures.reEnterPasswordInputField).clear().type(Cypress.env('user').password, { sensitive: true });
-        cy.get(registrationPopupFixtures.registerButton).click();
+        qautoHomePage
+            .clickSignUpButton();
+        registrationPopup
+            .verifyRegistrationPopup()
+            .enterName(Cypress.env('user').name)
+            .enterLastName(Cypress.env('user').lastName)
+            .enterEmail(Cypress.env('uniqueEmail'))
+            .enterPassword(Cypress.env('user').password)
+            .reEnterPassword(Cypress.env('user').password)
+            .clickRegisterButton();
 
         cy.url().should('include', '/panel/garage');
 
+        cy.resetSession();
         cy.login(Cypress.env('uniqueEmail'), Cypress.env('user').password);
+        cy.url().should('include', '/panel/garage');
     });
 });

@@ -4,7 +4,7 @@ module.exports = defineConfig({
   e2e: {
     baseUrl: "https://guest:welcome2qauto@qauto.forstudy.space",
     watchForFileChanges: false,
-    retries: 2,
+    retries: 0,
     defaultCommandTimeout: 10000,
     requestTimeout: 5000,
     responseTimeout: 30000,

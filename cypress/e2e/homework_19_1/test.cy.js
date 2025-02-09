@@ -81,8 +81,8 @@ describe('Homework_19_1', () => {
         cy.get(registrationPopupFixtures.nameInputField).clear().type(Cypress.env('user').name);
         cy.get(registrationPopupFixtures.lastNameInputField).clear().type(Cypress.env('user').lastName);
         cy.get(registrationPopupFixtures.emailInputField).clear().type(Cypress.env('uniqueEmail'));
-        cy.get(registrationPopupFixtures.passwordInputField).clear().type(Cypress.env('user').password);
-        cy.get(registrationPopupFixtures.reEnterPasswordInputField).clear().type(Cypress.env('user').password + '1');
+        cy.get(registrationPopupFixtures.passwordInputField).clear().type(Cypress.env('user').password, { sensitive: true });
+        cy.get(registrationPopupFixtures.reEnterPasswordInputField).clear().type(Cypress.env('user').password + '1', { sensitive: true });
         cy.get(registrationPopupFixtures.registrationTitle).click();
 
         cy.contains('p', 'Passwords do not match');
@@ -97,8 +97,8 @@ describe('Homework_19_1', () => {
         cy.get(registrationPopupFixtures.nameInputField).clear().type(Cypress.env('user').name);
         cy.get(registrationPopupFixtures.lastNameInputField).clear().type(Cypress.env('user').lastName);
         cy.get(registrationPopupFixtures.emailInputField).clear().type(Cypress.env('uniqueEmail'));
-        cy.get(registrationPopupFixtures.passwordInputField).clear().type(Cypress.env('user').password);
-        cy.get(registrationPopupFixtures.reEnterPasswordInputField).clear().type(Cypress.env('user').password);
+        cy.get(registrationPopupFixtures.passwordInputField).clear().type(Cypress.env('user').password, { sensitive: true });
+        cy.get(registrationPopupFixtures.reEnterPasswordInputField).clear().type(Cypress.env('user').password, { sensitive: true });
         cy.get(registrationPopupFixtures.registerButton).click();
 
         cy.url().should('include', '/panel/garage');

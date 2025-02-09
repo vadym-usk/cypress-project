@@ -2,7 +2,7 @@ const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   e2e: {
-    baseUrl: "https://example.com",
+    baseUrl: "https://guest:welcome2qauto@qauto.forstudy.space",
     watchForFileChanges: false,
     retries: 2,
     defaultCommandTimeout: 10000,
@@ -10,6 +10,6 @@ module.exports = defineConfig({
     responseTimeout: 30000,
     screenshotOnRunFailure: true,
     video: false,
-    setupNodeEvents(on, config) {}
+    setupNodeEvents(on, config) { }
   }
 });

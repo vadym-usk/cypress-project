@@ -12,8 +12,7 @@ describe('Homework_19_1', () => {
     })
 
     it('Check registration popup with empty fields', function () {
-        qautoHomePage
-            .clickSignUpButton();
+        qautoHomePage.clickSignUpButton();
         registrationPopup.verifyRegistrationPopup()
         registrationPopup.getName().clear();
         registrationPopup.getLastName().clear();

@@ -1,9 +1,0 @@
-{
-    "registrationTitle": "h4.modal-title",
-    "nameInputField": "#signupName",
-    "lastNameInputField": "#signupLastName",
-    "emailInputField": "#signupEmail",
-    "passwordInputField": "#signupPassword",
-    "reEnterPasswordInputField": "#signupRepeatPassword",
-    "registerButton": "button[type='button']:contains('Register')"
-}

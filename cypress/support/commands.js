@@ -1,5 +1,5 @@
-import { loginPopupPage } from '../pages/loginPopupPage';
-import { qautoHomePage } from '../pages/qautoHomePage';
+import { loginPopup } from '../pages/loginPopup';
+import { homePage } from '../pages/homePage';
 
 Cypress.Commands.add('resetSession', () => {
   cy.clearCookies();
@@ -11,13 +11,14 @@ Cypress.Commands.add('resetSession', () => {
 });
 
 Cypress.Commands.add('login', (email, password) => {
-  qautoHomePage
+  homePage
     .clickSignInButton();
-  loginPopupPage
+  loginPopup
     .verifyLoginPopup()
     .enterEmail(email)
     .enterPassword(password)
     .clickLoginButton();
+  cy.url().should('include', '/panel/garage');
 });
 
 Cypress.Commands.overwrite('type', (originalFn, element, text, options) => {

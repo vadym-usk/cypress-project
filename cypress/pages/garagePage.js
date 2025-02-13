@@ -1,4 +1,6 @@
 class GaragePage {
+    static url = '/panel/garage';
+
     elements = {
         garageTitle: () => cy.get('h1'),
         addCarButton: () => cy.get("button").contains('Add car'),
@@ -34,8 +36,9 @@ class GaragePage {
         }
     };
 
-    assertGarageTitle() {
+    assertGaragePage() {
         this.elements.garageTitle().should('have.text', 'Garage');
+        cy.url().should('include', GaragePage.url);
         return this;
     }
 
@@ -85,7 +88,7 @@ class GaragePage {
     }
 
     removeCar() {
-        cy.visit('/panel/garage');
+        cy.visit(GaragePage.url);
         this.elements.carEditButton().click();
         this.elements.editCarPopup.removeCarButton().click();
         this.elements.editCarPopup.removeCarPopup.removeButton().filter((_, el) => el.textContent.trim() === 'Remove').click();

@@ -7,7 +7,6 @@ describe('Homework_19_1', () => {
         const timestamp = Date.now();
         const uniqueEmail = user.email.replace('@', `+${timestamp}@`);
         Cypress.env('uniqueEmail', uniqueEmail);
-
         cy.visit('/');
     })
 
@@ -120,6 +119,5 @@ describe('Homework_19_1', () => {
 
         cy.resetSession();
         cy.login(Cypress.env('uniqueEmail'), Cypress.env('user').password);
-
     });
 });

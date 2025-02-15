@@ -8,9 +8,7 @@ describe('Homework_21_1', () => {
 
     it('Add new car to the garage', function () {
         cy.login(Cypress.env('email'), Cypress.env('password'));
-
-        garagePage.addCarAndSaveId(Cypress.env('testData').car.carMileage);
-
+        garagePage.addCarAndSaveId(Cypress.env('testData').car.mileage);
         garagePage.elements.addFuelExpenseButton().should('be.visible');
         garagePage.elements.carSection().should('be.visible');
 
@@ -20,10 +18,11 @@ describe('Homework_21_1', () => {
             body: {
                 email: Cypress.env('email'),
                 password: Cypress.env('password'),
-                "remember": false
+                remember: false
             },
         }).then((response) => {
             expect(response.status).to.equal(200);
+            expect(response.body.status).to.equal('ok');
             expect(response.body.data.userId).to.equal(Cypress.env('testData').user.userId);
 
             return cy.request({
@@ -32,9 +31,14 @@ describe('Homework_21_1', () => {
             });
         }).then((response) => {
             expect(response.status).to.equal(200);
+            expect(response.body.status).to.equal('ok');
             expect(response.body.data[0].id).to.equal(Cypress.env('carId'));
-            expect(response.body.data[0].mileage).to.equal(Cypress.env('testData').car.carMileage);
+            expect(response.body.data[0].mileage).to.equal(Cypress.env('testData').car.mileage);
         });
+    });
+
+    it('Add new expense for the existing car', function () {
+        cy.addCarExpense(Cypress.env('carId'));
     });
 
     after(() => {

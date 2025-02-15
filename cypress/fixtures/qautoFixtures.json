@@ -5,6 +5,8 @@
     "lastName": "testLastName"
   },
   "car": {
-    "carMileage": 14567
+    "mileage": 14567,
+    "liters": 5,
+    "totalCost": 20000
   }
 }

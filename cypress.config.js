@@ -4,6 +4,7 @@ const qautoFixtures = require('./cypress/fixtures/qautoFixtures.json');
 
 module.exports = defineConfig({
   e2e: {
+    setupNodeEvents(on, config) { },
     baseUrl: process.env.CYPRESS_BASE_URL,
     env: {
       baseUrl: process.env.CYPRESS_BASE_URL,
@@ -18,6 +19,12 @@ module.exports = defineConfig({
     responseTimeout: 30000,
     screenshotOnRunFailure: true,
     video: false,
-    setupNodeEvents(on, config) { }
+    reporter: "mochawesome",
+    reporterOptions: {
+      reportDir: "cypress/reports",
+      overwrite: false,
+      json: true,
+      html: false
+    }
   }
 });

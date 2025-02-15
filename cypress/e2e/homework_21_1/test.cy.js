@@ -38,7 +38,22 @@ describe('Homework_21_1', () => {
     });
 
     it('Add new expense for the existing car', function () {
-        cy.addCarExpense(Cypress.env('carId'));
+        cy.addCarExpense(
+            Cypress.env('testData').user.userId,
+            Cypress.env('carId'),
+            Cypress.env('testData').car.mileage + 1,
+            Cypress.env('testData').car.liters,
+            Cypress.env('testData').car.totalCost
+        ).then((response) => {
+            expect(response.status).to.equal(200);
+            expect(response.body.status).to.equal('ok');
+            expect(response.body.data.carId).to.equal(Cypress.env('carId'));
+            expect(response.body.data.reportedAt).to.equal(new Date().toISOString().split('T')[0]);
+            expect(response.body.data.liters).to.equal(Cypress.env('testData').car.liters);
+            expect(response.body.data.id).to.be.a('number');
+            expect(response.body.data.mileage).to.equal(Cypress.env('testData').car.mileage + 1);
+            expect(response.body.data.totalCost).to.equal(Cypress.env('testData').car.totalCost);
+        });
     });
 
     after(() => {

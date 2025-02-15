@@ -6,7 +6,7 @@ describe('Homework_20_1', () => {
         cy.visit('/');
     })
 
-    it('Add car to garage and fuel expenses', function () {
+    it('Add new car to the garage', function () {
         cy.login(Cypress.env('email'), Cypress.env('password'));
         garagePage
             .assertGaragePage()
@@ -15,7 +15,12 @@ describe('Homework_20_1', () => {
             .clickAddCarPopupAddButton();
         garagePage.elements.addFuelExpenseButton().should('be.visible');
         garagePage.elements.carSection().should('be.visible');
+    });
+
+    it('Add fuel expenses to the existing car from the Garage page', function () {
+        cy.login(Cypress.env('email'), Cypress.env('password'));
         garagePage
+            .visit()
             .clickAddFuelExpenseButton()
             .assertAddAnExpenseTitle()
             .enterExpenseMileage('14590')
@@ -28,7 +33,7 @@ describe('Homework_20_1', () => {
         fuelExpensesPage.elements.fuelExpensesTable().should('be.visible');
     });
 
-    afterEach(() => {
+    after(() => {
         garagePage.removeCar();
     });
 });

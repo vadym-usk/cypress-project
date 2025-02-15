@@ -36,6 +36,11 @@ class GaragePage {
         }
     };
 
+    visit() {
+        cy.visit('/' + GaragePage.url);
+        return this;
+    }
+
     assertGaragePage() {
         this.elements.garageTitle().should('have.text', 'Garage');
         cy.url().should('include', GaragePage.url);

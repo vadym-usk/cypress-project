@@ -2,11 +2,9 @@ import { homePage } from '../../pages/homePage';
 import { registrationPopup } from '../../pages/registrationPopup';
 
 describe('Homework_19_1', () => {
-    beforeEach(() => {
-        const user = Cypress.env('user');
+    beforeEach(function () {
         const timestamp = Date.now();
-        const uniqueEmail = user.email.replace('@', `+${timestamp}@`);
-        Cypress.env('uniqueEmail', uniqueEmail);
+        this.uniqueEmail = Cypress.env('email').replace('@', `${timestamp}@`);
         cy.visit('/');
     })
 
@@ -69,7 +67,7 @@ describe('Homework_19_1', () => {
             .verifyRegistrationPopup()
             .enterName('t')
             .enterLastName('testLastNametestLastN')
-            .enterEmail(Cypress.env('uniqueEmail'))
+            .enterEmail(this.uniqueEmail)
             .enterPassword('1Gsd1Gsd1Gsd1Gsd')
             .reEnterPassword('1Gsd1Gsd1Gsd1Gsd')
             .clickTitle()
@@ -90,11 +88,11 @@ describe('Homework_19_1', () => {
             .clickSignUpButton();
         registrationPopup
             .verifyRegistrationPopup()
-            .enterName(Cypress.env('user').name)
-            .enterLastName(Cypress.env('user').lastName)
-            .enterEmail(Cypress.env('uniqueEmail'))
-            .enterPassword(Cypress.env('user').password)
-            .reEnterPassword(Cypress.env('user').password + '1')
+            .enterName(Cypress.env('testData').user.name)
+            .enterLastName(Cypress.env('testData').user.lastName)
+            .enterEmail(this.uniqueEmail)
+            .enterPassword(Cypress.env('email'))
+            .reEnterPassword(Cypress.env('password') + '1')
             .clickTitle();
 
         cy.contains('p', 'Passwords do not match');
@@ -108,16 +106,16 @@ describe('Homework_19_1', () => {
             .clickSignUpButton();
         registrationPopup
             .verifyRegistrationPopup()
-            .enterName(Cypress.env('user').name)
-            .enterLastName(Cypress.env('user').lastName)
-            .enterEmail(Cypress.env('uniqueEmail'))
-            .enterPassword(Cypress.env('user').password)
-            .reEnterPassword(Cypress.env('user').password)
+            .enterName(Cypress.env('testData').user.name)
+            .enterLastName(Cypress.env('testData').user.lastName)
+            .enterEmail(this.uniqueEmail)
+            .enterPassword(Cypress.env('password'))
+            .reEnterPassword(Cypress.env('password'))
             .clickRegisterButton();
 
         cy.url().should('include', '/panel/garage');
 
         cy.resetSession();
-        cy.login(Cypress.env('uniqueEmail'), Cypress.env('user').password);
+        cy.login(this.uniqueEmail, Cypress.env('password'));
     });
 });

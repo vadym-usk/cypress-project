@@ -1,8 +1,16 @@
 const { defineConfig } = require("cypress");
+require('dotenv').config();
+const qautoFixtures = require('./cypress/fixtures/qautoFixtures.json');
 
 module.exports = defineConfig({
   e2e: {
-    baseUrl: "https://guest:welcome2qauto@qauto.forstudy.space",
+    baseUrl: process.env.CYPRESS_BASE_URL,
+    env: {
+      baseUrl: process.env.CYPRESS_BASE_URL,
+      email: process.env.CYPRESS_USER_EMAIL,
+      password: process.env.CYPRESS_USER_PASSWORD,
+      testData: qautoFixtures
+    },
     watchForFileChanges: false,
     retries: 0,
     defaultCommandTimeout: 10000,

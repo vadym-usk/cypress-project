@@ -1,8 +1,12 @@
 {
   "devDependencies": {
-    "cypress": "^14.0.1"
+    "cypress": "^14.0.1",
+    "dotenv": "^16.4.7"
   },
   "scripts": {
-    "cypress:open": "npx cypress open1"
+    "cy:open:qauto": "CYPRESS_BASE_URL=https://guest:welcome2qauto@qauto.forstudy.space CYPRESS_USER_EMAIL=test-email+1@gmail.com CYPRESS_USER_PASSWORD=Secretpass123 npx cypress open",
+    "cy:run:qauto": "CYPRESS_BASE_URL=https://guest:welcome2qauto@qauto.forstudy.space CYPRESS_USER_EMAIL=test-email+1@gmail.com CYPRESS_USER_PASSWORD=Secretpass123 npx cypress run",
+    "cy:open:qauto2": "CYPRESS_BASE_URL=https://guest:welcome2qauto@qauto2.forstudy.space CYPRESS_USER_EMAIL=test-email+2@gmail.com CYPRESS_USER_PASSWORD=Secretpass123 npx cypress open",
+    "cy:run:qauto2": "CYPRESS_BASE_URL=https://guest:welcome2qauto@qauto2.forstudy.space CYPRESS_USER_EMAIL=test-email+2@gmail.com CYPRESS_USER_PASSWORD=Secretpass123 npx cypress run"
   }
 }

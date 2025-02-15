@@ -1,6 +1,0 @@
-{
-    "loginTitle": "h4.modal-title",
-    "emailInputField": "#signinEmail",
-    "passwordInputField": "#signinPassword",
-    "loginButton": "button[type='button']:contains('Login')"
-}

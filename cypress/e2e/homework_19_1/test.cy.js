@@ -1,25 +1,25 @@
-import { qautoHomePage } from '../../pages/qautoHomePage';
-import { registrationPopup } from '../../pages/registrationPopupPage';
+import { homePage } from '../../pages/homePage';
+import { registrationPopup } from '../../pages/registrationPopup';
 
 describe('Homework_19_1', () => {
-    beforeEach(() => {
-        const user = Cypress.env('user');
+    beforeEach(function () {
         const timestamp = Date.now();
-        const uniqueEmail = user.email.replace('@', `+${timestamp}@`);
-        Cypress.env('uniqueEmail', uniqueEmail);
-
+        this.uniqueEmail = Cypress.env('email').replace('@', `${timestamp}@`);
         cy.visit('/');
     })
 
     it('Check registration popup with empty fields', function () {
-        qautoHomePage.clickSignUpButton();
-        registrationPopup.verifyRegistrationPopup()
-        registrationPopup.getName().clear();
-        registrationPopup.getLastName().clear();
-        registrationPopup.getEmail().clear();
-        registrationPopup.getPassword().clear();
-        registrationPopup.getReEnterPassword().clear();
-        registrationPopup.clickTitle()
+        homePage
+            .clickSignUpButton();
+        registrationPopup
+            .verifyRegistrationPopup();
+        registrationPopup.elements.nameInputField().clear();
+        registrationPopup.elements.lastNameInputField().clear();
+        registrationPopup.elements.emailInputField().clear();
+        registrationPopup.elements.passwordInputField().clear();
+        registrationPopup.elements.reEnterPasswordInputField().clear();
+        registrationPopup
+            .clickTitle()
 
         cy.contains('p', 'Name required');
         cy.contains('p', 'Last name required');
@@ -27,16 +27,16 @@ describe('Homework_19_1', () => {
         cy.contains('p', 'Password required');
         cy.contains('p', 'Re-enter password required');
 
-        registrationPopup.getRegisterButton().should('be.disabled')
-        registrationPopup.getName().should('have.css', 'border-color', 'rgb(220, 53, 69)');
-        registrationPopup.getLastName().should('have.css', 'border-color', 'rgb(220, 53, 69)');
-        registrationPopup.getEmail().should('have.css', 'border-color', 'rgb(220, 53, 69)');
-        registrationPopup.getPassword().should('have.css', 'border-color', 'rgb(220, 53, 69)');
-        registrationPopup.getReEnterPassword().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.elements.registerButton().should('be.disabled')
+        registrationPopup.elements.nameInputField().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.elements.lastNameInputField().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.elements.emailInputField().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.elements.passwordInputField().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.elements.reEnterPasswordInputField().should('have.css', 'border-color', 'rgb(220, 53, 69)');
     });
 
     it('Check registration popup with wrong data', function () {
-        qautoHomePage
+        homePage
             .clickSignUpButton();
         registrationPopup
             .verifyRegistrationPopup()
@@ -52,22 +52,22 @@ describe('Homework_19_1', () => {
         cy.contains('p', 'Email is incorrect');
         cy.contains('p', 'Password has to be from 8 to 15 characters long and contain at least one integer, one capital, and one small letter');
 
-        registrationPopup.getRegisterButton().should('be.disabled')
-        registrationPopup.getName().should('have.css', 'border-color', 'rgb(220, 53, 69)');
-        registrationPopup.getLastName().should('have.css', 'border-color', 'rgb(220, 53, 69)');
-        registrationPopup.getEmail().should('have.css', 'border-color', 'rgb(220, 53, 69)');
-        registrationPopup.getPassword().should('have.css', 'border-color', 'rgb(220, 53, 69)');
-        registrationPopup.getReEnterPassword().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.elements.registerButton().should('be.disabled')
+        registrationPopup.elements.nameInputField().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.elements.lastNameInputField().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.elements.emailInputField().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.elements.passwordInputField().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.elements.reEnterPasswordInputField().should('have.css', 'border-color', 'rgb(220, 53, 69)');
     });
 
     it('Check registration popup with wrong length for Name, Last Name and Password fields', function () {
-        qautoHomePage
+        homePage
             .clickSignUpButton();
         registrationPopup
             .verifyRegistrationPopup()
             .enterName('t')
             .enterLastName('testLastNametestLastN')
-            .enterEmail(Cypress.env('uniqueEmail'))
+            .enterEmail(this.uniqueEmail)
             .enterPassword('1Gsd1Gsd1Gsd1Gsd')
             .reEnterPassword('1Gsd1Gsd1Gsd1Gsd')
             .clickTitle()
@@ -76,47 +76,46 @@ describe('Homework_19_1', () => {
         cy.contains('p', 'Last name has to be from 2 to 20 characters long');
         cy.contains('p', 'Password has to be from 8 to 15 characters long and contain at least one integer, one capital, and one small letter');
 
-        registrationPopup.getRegisterButton().should('be.disabled')
-        registrationPopup.getName().should('have.css', 'border-color', 'rgb(220, 53, 69)');
-        registrationPopup.getLastName().should('have.css', 'border-color', 'rgb(220, 53, 69)');
-        registrationPopup.getPassword().should('have.css', 'border-color', 'rgb(220, 53, 69)');
-        registrationPopup.getReEnterPassword().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.elements.registerButton().should('be.disabled')
+        registrationPopup.elements.nameInputField().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.elements.lastNameInputField().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.elements.passwordInputField().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.elements.reEnterPasswordInputField().should('have.css', 'border-color', 'rgb(220, 53, 69)');
     });
 
     it('Check registration popup with not matched passwords', function () {
-        qautoHomePage
+        homePage
             .clickSignUpButton();
         registrationPopup
             .verifyRegistrationPopup()
-            .enterName(Cypress.env('user').name)
-            .enterLastName(Cypress.env('user').lastName)
-            .enterEmail(Cypress.env('uniqueEmail'))
-            .enterPassword(Cypress.env('user').password)
-            .reEnterPassword(Cypress.env('user').password + '1')
-            .clickTitle()
+            .enterName(Cypress.env('testData').user.name)
+            .enterLastName(Cypress.env('testData').user.lastName)
+            .enterEmail(this.uniqueEmail)
+            .enterPassword(Cypress.env('email'))
+            .reEnterPassword(Cypress.env('password') + '1')
+            .clickTitle();
 
         cy.contains('p', 'Passwords do not match');
 
-        registrationPopup.getRegisterButton().should('be.disabled')
-        registrationPopup.getReEnterPassword().should('have.css', 'border-color', 'rgb(220, 53, 69)');
+        registrationPopup.elements.registerButton().should('be.disabled')
+        registrationPopup.elements.reEnterPasswordInputField().should('have.css', 'border-color', 'rgb(220, 53, 69)');
     });
 
     it('Check successfull registration', function () {
-        qautoHomePage
+        homePage
             .clickSignUpButton();
         registrationPopup
             .verifyRegistrationPopup()
-            .enterName(Cypress.env('user').name)
-            .enterLastName(Cypress.env('user').lastName)
-            .enterEmail(Cypress.env('uniqueEmail'))
-            .enterPassword(Cypress.env('user').password)
-            .reEnterPassword(Cypress.env('user').password)
+            .enterName(Cypress.env('testData').user.name)
+            .enterLastName(Cypress.env('testData').user.lastName)
+            .enterEmail(this.uniqueEmail)
+            .enterPassword(Cypress.env('password'))
+            .reEnterPassword(Cypress.env('password'))
             .clickRegisterButton();
 
         cy.url().should('include', '/panel/garage');
 
         cy.resetSession();
-        cy.login(Cypress.env('uniqueEmail'), Cypress.env('user').password);
-        cy.url().should('include', '/panel/garage');
+        cy.login(this.uniqueEmail, Cypress.env('password'));
     });
 });

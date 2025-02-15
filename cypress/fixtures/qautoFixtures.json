@@ -1,7 +1,10 @@
 {
   "user": {
+    "userId": 183618,
     "name": "testName",
     "lastName": "testLastName"
   },
-  "carId": 254773
+  "car": {
+    "carMileage": 14567
+  }
 }

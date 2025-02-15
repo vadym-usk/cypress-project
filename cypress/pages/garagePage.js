@@ -74,10 +74,7 @@ class GaragePage {
             expect(interception.response.statusCode).to.eq(201);
 
             const carId = interception.response.body.data.id;
-            cy.readFile('cypress/fixtures/qautoFixtures.json').then((data) => {
-                data.carId = carId;
-                cy.writeFile('cypress/fixtures/qautoFixtures.json', data);
-            });
+            Cypress.env('carId', carId);
         });
 
         return this;

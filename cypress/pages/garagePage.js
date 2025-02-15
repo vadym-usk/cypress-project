@@ -60,6 +60,27 @@ class GaragePage {
     clickAddCarPopupAddButton() {
         this.elements.addCarPopup.addButton().click();
         return this;
+    };
+
+    addCarAndSaveId(mileage) {
+        cy.intercept('POST', '**/api/cars').as('addCar');
+        this
+            .assertGaragePage()
+            .clickAddCarButton()
+            .enterMileage(mileage)
+            .clickAddCarPopupAddButton();
+
+        cy.wait('@addCar').then((interception) => {
+            expect(interception.response.statusCode).to.eq(201);
+
+            const carId = interception.response.body.data.id;
+            cy.readFile('cypress/fixtures/qautoFixtures.json').then((data) => {
+                data.carId = carId;
+                cy.writeFile('cypress/fixtures/qautoFixtures.json', data);
+            });
+        });
+
+        return this;
     }
 
     clickAddFuelExpenseButton() {

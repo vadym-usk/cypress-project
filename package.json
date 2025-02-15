@@ -7,6 +7,9 @@
     "mochawesome-report-generator": "^6.2.0"
   },
   "scripts": {
+    "cy:run:test": "npm run clean-reports && CYPRESS_BASE_URL=https://guest:welcome2qauto@qauto.forstudy.space CYPRESS_USER_EMAIL=test-email+1@gmail.com CYPRESS_USER_PASSWORD=Secretpass123 npx cypress run --spec cypress/e2e/homework_21_1/test.cy.js && npm run generate-report && npm run open-report",
+    "cy:open:test": "CYPRESS_BASE_URL=https://guest:welcome2qauto@qauto.forstudy.space CYPRESS_USER_EMAIL=test-email+1@gmail.com CYPRESS_USER_PASSWORD=Secretpass123 npx cypress open",
+    
     "cy:open:qauto": "CYPRESS_BASE_URL=https://guest:welcome2qauto@qauto.forstudy.space CYPRESS_USER_EMAIL=test-email+1@gmail.com CYPRESS_USER_PASSWORD=Secretpass123 npx cypress open",
     "cy:run:qauto": "npm run clean-reports && CYPRESS_BASE_URL=https://guest:welcome2qauto@qauto.forstudy.space CYPRESS_USER_EMAIL=test-email+1@gmail.com CYPRESS_USER_PASSWORD=Secretpass123 npx cypress run && npm run generate-report && npm run open-report",
     "cy:open:qauto2": "CYPRESS_BASE_URL=https://guest:welcome2qauto@qauto2.forstudy.space CYPRESS_USER_EMAIL=test-email+2@gmail.com CYPRESS_USER_PASSWORD=Secretpass123 npx cypress open",

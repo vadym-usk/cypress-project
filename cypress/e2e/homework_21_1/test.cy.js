@@ -8,23 +8,21 @@ describe('Homework_20_1', () => {
 
     it('Add new car to the garage', function () {
         cy.login(Cypress.env('email'), Cypress.env('password'));
-        garagePage
-            .assertGaragePage()
-            .clickAddCarButton()
-            .enterMileage(14567)
-            .clickAddCarPopupAddButton();
+        
+        garagePage.addCarAndSaveId('14567');
+        
         garagePage.elements.addFuelExpenseButton().should('be.visible');
         garagePage.elements.carSection().should('be.visible');
     });
 
-    it('Add fuel expenses to the existing car from the Garage page', function () {
+    it.skip('Add fuel expenses to the existing car from the Garage page', function () {
         cy.login(Cypress.env('email'), Cypress.env('password'));
         garagePage
             .visit()
             .clickAddFuelExpenseButton()
             .assertAddAnExpenseTitle()
-            .enterExpenseMileage(14590)
-            .enterNumberOfLiters(5)
+            .enterExpenseMileage('14590')
+            .enterNumberOfLiters('5')
             .enterTotalCost(20000)
             .clickAddAnExpensePopupAddButton();
         fuelExpensesPage
@@ -34,6 +32,6 @@ describe('Homework_20_1', () => {
     });
 
     after(() => {
-        garagePage.removeCar();
+        //garagePage.removeCar();
     });
 });

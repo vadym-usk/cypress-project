@@ -30,7 +30,7 @@ describe('Homework_20_1', () => {
         fuelExpensesPage
             .visit()
             .assertFuelExpensesPage();
-        fuelExpensesPage.elements.fuelExpensesTable().should('be.visible');
+        fuelExpensesPage.elements.fuelExpensesSection().should('be.visible');
     });
 
     after(() => {

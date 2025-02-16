@@ -6,6 +6,12 @@ class GaragePage {
         addCarButton: () => cy.get("button").contains('Add car'),
         carSection: () => cy.get('.car'),
 
+        carTable: {
+            carLogo: () => cy.get('img.car-logo_img'),
+            carName: () => cy.get('p.car_name.h2'),
+            carMileageDate: () => cy.get('p.car_update-mileage')
+        },
+
         addCarPopup: {
             addCarTitle: () => cy.get('h4.modal-title'),
             brandInputField: () => cy.get('#addCarBrand'),

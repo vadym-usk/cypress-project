@@ -3,7 +3,14 @@ class FuelExpensesPage {
 
     elements = {
         fuelExpensesTitle: () => cy.get('h1'),
-        fuelExpensesTable: () => cy.get('.panel-page')
+        fuelExpensesSection: () => cy.get('.panel-page'),
+        fuelExpensesTable: {
+            fuelExpensesTable: () => cy.get('table.expenses_table'),
+            fuelExpensesDate: () => cy.get('td').eq(0),
+            fuelExpensesMileage: () => cy.get('td').eq(1),
+            fuelExpensesLitersUsed: () => cy.get('td').eq(2),
+            fuelExpensesTotalCost: () => cy.get('td').eq(3)
+        }
     };
 
     visit() {

@@ -11,26 +11,26 @@ describe('Homework_20_1', () => {
         garagePage
             .assertGaragePage()
             .clickAddCarButton()
-            .enterMileage('14567')
+            .enterMileage(Cypress.env('testData').car.mileage)
             .clickAddCarPopupAddButton();
         garagePage.elements.addFuelExpenseButton().should('be.visible');
         garagePage.elements.carSection().should('be.visible');
     });
 
-    it('Add fuel expenses to the existing car from the Garage page', function () {
+    it('Add fuel expenses for the existing car from the Garage page', function () {
         cy.login(Cypress.env('email'), Cypress.env('password'));
         garagePage
             .visit()
             .clickAddFuelExpenseButton()
             .assertAddAnExpenseTitle()
-            .enterExpenseMileage('14590')
-            .enterNumberOfLiters('5')
-            .enterTotalCost(20000)
+            .enterExpenseMileage(Cypress.env('testData').car.mileage)
+            .enterNumberOfLiters(Cypress.env('testData').car.liters)
+            .enterTotalCost(Cypress.env('testData').car.totalCost)
             .clickAddAnExpensePopupAddButton();
         fuelExpensesPage
             .visit()
             .assertFuelExpensesPage();
-        fuelExpensesPage.elements.fuelExpensesTable().should('be.visible');
+        fuelExpensesPage.elements.fuelExpensesSection().should('be.visible');
     });
 
     after(() => {

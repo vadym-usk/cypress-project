@@ -33,3 +33,35 @@ Cypress.Commands.overwrite('type', (originalFn, element, text, options) => {
 
   return originalFn(element, text, options)
 })
+
+Cypress.Commands.add('addCarExpense', (userId, carId, carMileage, carLiters, carTotalCost) => {
+  return cy.request({
+    method: 'POST',
+    url: 'api/auth/signin',
+    body: {
+      email: Cypress.env('email'),
+      password: Cypress.env('password'),
+      remember: false
+    },
+  }).then((response) => {
+    expect(response.status).to.equal(200);
+    expect(response.body.status).to.equal('ok');
+    expect(response.body.data.userId).to.equal(userId);
+
+    return cy.request({
+      method: 'POST',
+      url: '/api/expenses',
+      body: {
+        carId: carId,
+        reportedAt: new Date().toISOString().split('T')[0],
+        mileage: carMileage,
+        liters: carLiters,
+        totalCost: carTotalCost,
+        forceMileage: false
+      },
+    });
+  }).then((response) => {
+    expect(response.status).to.equal(200);
+    expect(response.body.status).to.equal('ok');
+  });
+});

@@ -1,6 +1,13 @@
 {
-    "user": {
-        "name": "testName",
-        "lastName": "testLastName"
-    }
+  "user": {
+    "userId": 183618,
+    "name": "testName",
+    "lastName": "testLastName"
+  },
+  "car": {
+    "carName": "Audi TT",
+    "mileage": 14567,
+    "liters": 5,
+    "totalCost": 20000
+  }
 }

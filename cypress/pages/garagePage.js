@@ -6,6 +6,12 @@ class GaragePage {
         addCarButton: () => cy.get("button").contains('Add car'),
         carSection: () => cy.get('.car'),
 
+        carTable: {
+            carLogo: () => cy.get('img.car-logo_img'),
+            carName: () => cy.get('p.car_name.h2'),
+            carMileageDate: () => cy.get('p.car_update-mileage')
+        },
+
         addCarPopup: {
             addCarTitle: () => cy.get('h4.modal-title'),
             brandInputField: () => cy.get('#addCarBrand'),
@@ -59,6 +65,24 @@ class GaragePage {
 
     clickAddCarPopupAddButton() {
         this.elements.addCarPopup.addButton().click();
+        return this;
+    };
+
+    addCarAndSaveId(mileage) {
+        cy.intercept('POST', '**/api/cars').as('addCar');
+        this
+            .assertGaragePage()
+            .clickAddCarButton()
+            .enterMileage(mileage)
+            .clickAddCarPopupAddButton();
+
+        cy.wait('@addCar').then((interception) => {
+            expect(interception.response.statusCode).to.eq(201);
+
+            const carId = interception.response.body.data.id;
+            Cypress.env('carId', carId);
+        });
+
         return this;
     }
 

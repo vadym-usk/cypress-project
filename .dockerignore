@@ -3,3 +3,4 @@ cypress/reports/
 cypress/screenshots/
 node_modules/
 .gitignore
+.DS_Store

@@ -1,0 +1,38 @@
+name: Run Cypress in Docker
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  cypress-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 🧱 Клонируем репозиторий
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 🐳 Логин в Docker (опционально, если нужен приватный registry)
+      # - name: Login to DockerHub
+      #   run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+
+      # 🔧 Собираем Docker image
+      - name: Build Docker Image
+        run: docker build -t cypress-tests .
+
+      # 🚀 Запускаем контейнер
+      - name: Run Cypress Tests in Docker
+        run: |
+          docker run --name cypress-runner \
+            -v ${{ github.workspace }}/cypress-reports:/app/cypress/reports \
+            cypress-tests
+
+      # 📎 Сохраняем отчёт как artifact
+      - name: Upload HTML Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-report
+          path: cypress-reports/index.html

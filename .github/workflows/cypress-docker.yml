@@ -34,5 +34,4 @@ jobs:
           path: cypress-reports/index.html
 
       - name: Show report link
-        run: |
-          echo "::notice title=Cypress Report::[Click here to download the Cypress report](./cypress-reports/index.html)"
+        run: echo "::notice title=Cypress Report::You can download the report from the 'Artifacts' section above ⬆️"

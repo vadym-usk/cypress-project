@@ -1,4 +1,4 @@
-name: Run Cypress in Docker
+name: Run Cypress tests in Docker
 
 on:
   push:
@@ -11,22 +11,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 🧱 Клонируем репозиторий
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 🔧 Собираем Docker image
       - name: Build Docker Image
         run: docker build -t cypress-tests .
 
-      # 🚀 Запускаем контейнер
       - name: Run Cypress Tests in Docker
         run: |
           docker run --name cypress-runner \
             -v ${{ github.workspace }}/cypress-reports:/app/cypress/reports \
             cypress-tests
 
-      # 📎 Сохраняем отчёт как artifact
       - name: Upload HTML Report
         uses: actions/upload-artifact@v4
         with:

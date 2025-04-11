@@ -1,10 +1,10 @@
 import { homePage } from '../../pages/homePage';
 
-describe('Homework_18_1', () => {
-    beforeEach(() => {
-        cy.visit('/');
-    })
+beforeEach(() => {
+    cy.visit('/');
+})
 
+describe('Homepage - Positive', () => {
     it('Check all header buttons', function () {
         homePage.elements.header.logo().should('be.visible')
         homePage.elements.header.buttons.homeButton().contains('Home').should('be.visible')

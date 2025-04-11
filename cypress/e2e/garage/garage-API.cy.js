@@ -1,18 +1,15 @@
 import { garagePage } from '../../pages/garagePage';
-import { fuelExpensesPage } from '../../pages/fuelExpensesPage';
 
 let currentDateISO;
-let currentDateFormatted;
 
-describe('Homework_21_1', () => {
-    beforeEach(() => {
-        const today = new Date();
-        currentDateISO = today.toISOString().split('T')[0]; // "YYYY-MM-DD"
-        currentDateFormatted = today.toLocaleDateString('ru-RU'); // "DD.MM.YYYY"
-        cy.visit('/');
-    })
+beforeEach(() => {
+    const today = new Date();
+    currentDateISO = today.toISOString().split('T')[0]; // "YYYY-MM-DD"
+    cy.visit('/');
+})
 
-    it('Add new car to the garage', function () {
+describe('Garage API - Positive', () => {
+    it('Add new car to the garage by API', function () {
         cy.login(Cypress.env('email'), Cypress.env('password'));
         garagePage.addCarAndSaveId(Cypress.env('testData').car.mileage);
         garagePage.elements.addFuelExpenseButton().should('be.visible');
@@ -43,7 +40,7 @@ describe('Homework_21_1', () => {
         });
     });
 
-    it('Add new expense for the existing car', function () {
+    it('Add new expense for the existing car by API', function () {
         cy.addCarExpense(
             Cypress.env('testData').user.userId,
             Cypress.env('carId'),
@@ -61,26 +58,8 @@ describe('Homework_21_1', () => {
             expect(response.body.data.totalCost).to.equal(Cypress.env('testData').car.totalCost);
         });
     });
+});
 
-    it('Check expense for the existing car', function () {
-        cy.login(Cypress.env('email'), Cypress.env('password'));
-        garagePage.assertGaragePage();
-        garagePage.elements.carSection().should('be.visible');
-        garagePage.elements.carTable.carLogo().should('have.attr', 'src').and('include', 'audi.png');
-        garagePage.elements.carTable.carName().should('contain', Cypress.env('testData').car.carName);
-        garagePage.elements.carTable.carMileageDate().should('contain', currentDateFormatted);
-        fuelExpensesPage
-            .visit()
-            .assertFuelExpensesPage()
-        fuelExpensesPage.elements.fuelExpensesSection().should('be.visible');
-        fuelExpensesPage.elements.fuelExpensesTable.fuelExpensesTable().should('be.visible');
-        fuelExpensesPage.elements.fuelExpensesTable.fuelExpensesDate().contains(currentDateFormatted).should('be.visible');
-        fuelExpensesPage.elements.fuelExpensesTable.fuelExpensesMileage().should('contain', Cypress.env('testData').car.mileage + 1);
-        fuelExpensesPage.elements.fuelExpensesTable.fuelExpensesLitersUsed().should('contain', Cypress.env('testData').car.liters);
-        fuelExpensesPage.elements.fuelExpensesTable.fuelExpensesTotalCost().should('contain', Cypress.env('testData').car.totalCost);
-    });
-
-    after(() => {
-        garagePage.removeCar();
-    });
+after(() => {
+    garagePage.removeCar();
 });

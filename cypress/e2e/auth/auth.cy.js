@@ -1,13 +1,33 @@
 import { homePage } from '../../pages/homePage';
 import { registrationPopup } from '../../pages/registrationPopup';
 
-describe('Homework_19_1', () => {
-    beforeEach(function () {
-        const timestamp = Date.now();
-        this.uniqueEmail = Cypress.env('email').replace('@', `${timestamp}@`);
-        cy.visit('/');
-    })
+beforeEach(function () {
+    const timestamp = Date.now();
+    this.uniqueEmail = Cypress.env('email').replace('@', `${timestamp}@`);
+    cy.visit('/');
+})
 
+describe('Auth - Positive', () => {
+    it('Check successfull registration', function () {
+        homePage
+            .clickSignUpButton();
+        registrationPopup
+            .verifyRegistrationPopup()
+            .enterName(Cypress.env('testData').user.name)
+            .enterLastName(Cypress.env('testData').user.lastName)
+            .enterEmail(this.uniqueEmail)
+            .enterPassword(Cypress.env('password'))
+            .reEnterPassword(Cypress.env('password'))
+            .clickRegisterButton();
+
+        cy.url().should('include', '/panel/garage');
+
+        cy.resetSession();
+        cy.login(this.uniqueEmail, Cypress.env('password'));
+    });
+});
+
+describe('Auth - Negative', () => {
     it('Check registration popup with empty fields', function () {
         homePage
             .clickSignUpButton();
@@ -83,7 +103,7 @@ describe('Homework_19_1', () => {
         registrationPopup.elements.reEnterPasswordInputField().should('have.css', 'border-color', 'rgb(220, 53, 69)');
     });
 
-    it('Check registration popup with not matched passwords', function () {
+    it('Check registration popup with dismatched passwords', function () {
         homePage
             .clickSignUpButton();
         registrationPopup
@@ -99,23 +119,5 @@ describe('Homework_19_1', () => {
 
         registrationPopup.elements.registerButton().should('be.disabled')
         registrationPopup.elements.reEnterPasswordInputField().should('have.css', 'border-color', 'rgb(220, 53, 69)');
-    });
-
-    it('Check successfull registration', function () {
-        homePage
-            .clickSignUpButton();
-        registrationPopup
-            .verifyRegistrationPopup()
-            .enterName(Cypress.env('testData').user.name)
-            .enterLastName(Cypress.env('testData').user.lastName)
-            .enterEmail(this.uniqueEmail)
-            .enterPassword(Cypress.env('password'))
-            .reEnterPassword(Cypress.env('password'))
-            .clickRegisterButton();
-
-        cy.url().should('include', '/panel/garage');
-
-        cy.resetSession();
-        cy.login(this.uniqueEmail, Cypress.env('password'));
     });
 });

@@ -1,3 +1,4 @@
+.env
 allure-report/
 allure-results/
 cypress/downloads/

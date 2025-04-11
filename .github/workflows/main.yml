@@ -23,6 +23,9 @@ jobs:
       - name: 🧪 Run Cypress Tests in Docker
         run: |
           docker run --rm \
+            -e CYPRESS_BASE_URL=https://guest:welcome2qauto@qauto.forstudy.space \
+            -e CYPRESS_USER_EMAIL=test-email+1@gmail.com \
+            -e CYPRESS_USER_PASSWORD=Secretpass123 \
             -v ${{ github.workspace }}/allure-results:/app/allure-results \
             cypress-tests
 

@@ -78,7 +78,6 @@ class GaragePage {
 
         cy.wait('@addCar').then((interception) => {
             expect(interception.response.statusCode).to.eq(201);
-
             const carId = interception.response.body.data.id;
             Cypress.env('carId', carId);
         });

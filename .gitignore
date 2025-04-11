@@ -1,5 +1,7 @@
+.env
+allure-report/
+allure-results/
 cypress/downloads/
-cypress/reports/
 cypress/screenshots/
 node_modules/
 .DS_Store

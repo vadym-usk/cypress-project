@@ -1,5 +1,7 @@
 {
   "devDependencies": {
+    "@shelex/cypress-allure-plugin": "^2.41.0",
+    "allure-commandline": "^2.33.0",
     "cypress": "^14.2.1",
     "dotenv": "^16.4.7",
     "mochawesome": "^7.1.3",
@@ -7,18 +9,11 @@
     "mochawesome-report-generator": "^6.2.0"
   },
   "scripts": {
-    "cy:run:test": "npm run clean-reports && CYPRESS_BASE_URL=https://guest:welcome2qauto@qauto.forstudy.space CYPRESS_USER_EMAIL=test-email+1@gmail.com CYPRESS_USER_PASSWORD=Secretpass123 npx cypress run && npm run generate-report && npm run open-report",
-    "cy:run:test2": "npm run clean-reports && CYPRESS_BASE_URL=https://guest:welcome2qauto@qauto.forstudy.space CYPRESS_USER_EMAIL=test-email+1@gmail.com CYPRESS_USER_PASSWORD=Secretpass123 npx cypress run --spec cypress/e2e/homework_21_1/test.cy.js && npm run generate-report && npm run open-report",
-    "cy:run:test:chrome": "npm run clean-reports && CYPRESS_BASE_URL=https://guest:welcome2qauto@qauto.forstudy.space CYPRESS_USER_EMAIL=test-email+1@gmail.com CYPRESS_USER_PASSWORD=Secretpass123 npx cypress run --browser chrome && npm run generate-report ",
-    "cy:run:test:firefox": "npm run clean-reports && CYPRESS_BASE_URL=https://guest:welcome2qauto@qauto.forstudy.space CYPRESS_USER_EMAIL=test-email+1@gmail.com CYPRESS_USER_PASSWORD=Secretpass123 npx cypress run --browser firefox && npm run generate-report",
-    "cy:open:test": "CYPRESS_BASE_URL=https://guest:welcome2qauto@qauto.forstudy.space CYPRESS_USER_EMAIL=test-email+1@gmail.com CYPRESS_USER_PASSWORD=Secretpass123 npx cypress open",
-    "cy:open:qauto": "CYPRESS_BASE_URL=https://guest:welcome2qauto@qauto.forstudy.space CYPRESS_USER_EMAIL=test-email+1@gmail.com CYPRESS_USER_PASSWORD=Secretpass123 npx cypress open",
-    "cy:run:qauto": "npm run clean-reports && CYPRESS_BASE_URL=https://guest:welcome2qauto@qauto.forstudy.space CYPRESS_USER_EMAIL=test-email+1@gmail.com CYPRESS_USER_PASSWORD=Secretpass123 npx cypress run && npm run generate-report && npm run open-report",
-    "cy:open:qauto2": "CYPRESS_BASE_URL=https://guest:welcome2qauto@qauto2.forstudy.space CYPRESS_USER_EMAIL=test-email+2@gmail.com CYPRESS_USER_PASSWORD=Secretpass123 npx cypress open",
-    "cy:run:qauto2": "npm run clean-reports && CYPRESS_BASE_URL=https://guest:welcome2qauto@qauto2.forstudy.space CYPRESS_USER_EMAIL=test-email+2@gmail.com CYPRESS_USER_PASSWORD=Secretpass123 npx cypress run && npm run generate-report && npm run open-report",
-    "merge-report": "npx mochawesome-merge cypress/reports/*.json -o cypress/reports/index.json",
-    "generate-report": "npm run merge-report && npx marge cypress/reports/index.json -o cypress/reports",
-    "open-report": "open cypress/reports/index.html",
-    "clean-reports": "rm -rf cypress/reports/*"
+    "cy:run:test": "npm run clean:allure && CYPRESS_BASE_URL=https://guest:welcome2qauto@qauto.forstudy.space CYPRESS_USER_EMAIL=test-email+1@gmail.com CYPRESS_USER_PASSWORD=Secretpass123 npx cypress run && npm run allure:generate && npm run allure:open",
+    "cy:run:test:chrome": "npm run clean:allure && CYPRESS_BASE_URL=https://guest:welcome2qauto@qauto.forstudy.space CYPRESS_USER_EMAIL=test-email+1@gmail.com CYPRESS_USER_PASSWORD=Secretpass123 npx cypress run --browser chrome && npm run allure:generate && npm run allure:open",
+    "cy:run:test:firefox": "npm run clean:allure && CYPRESS_BASE_URL=https://guest:welcome2qauto@qauto.forstudy.space CYPRESS_USER_EMAIL=test-email+1@gmail.com CYPRESS_USER_PASSWORD=Secretpass123 npx cypress run --browser firefox && npm run allure:generate && npm run allure:open",
+    "allure:generate": "allure generate allure-results --clean -o allure-report",
+    "allure:open": "allure open allure-report & disown",
+    "clean:allure": "rm -rf allure-results allure-report"
   }
 }

@@ -6,4 +6,4 @@ RUN apt-get update && \
 COPY package*.json ./
 RUN npm ci
 COPY . .
-CMD ["npx", "cypress", "run", "--browser", "chrome"]
+CMD npx cypress run --browser chrome && allure generate allure-results --clean -o allure-report

@@ -29,6 +29,7 @@ jobs:
             -e CYPRESS_USER_EMAIL=${{ secrets.CYPRESS_USER_EMAIL }} \
             -e CYPRESS_USER_PASSWORD=${{ secrets.CYPRESS_USER_PASSWORD }} \
             -v ${{ github.workspace }}/allure-results:/app/allure-results \
+            -v ${{ github.workspace }}/allure-report:/app/allure-report \
             cypress-tests
 
       - name: 📊 Generate Allure Report

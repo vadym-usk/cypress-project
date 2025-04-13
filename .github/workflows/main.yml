@@ -45,7 +45,7 @@ jobs:
       - name: 📊 Generate Allure Report for Electron
         run: |
           npm install -g allure-commandline
-          allure generate allure-results/electron --clean -o allure-report
+          allure generate allure-results/electron --clean -o allure-report-electron
 
       - name: 📁 Upload Allure Report for Electron
         uses: actions/upload-artifact@v4
@@ -56,7 +56,7 @@ jobs:
       - name: 📊 Generate Allure Report for Chrome
         run: |
           npm install -g allure-commandline
-          allure generate allure-results/chrome --clean -o allure-report
+          allure generate allure-results/chrome --clean -o allure-report-chrome
 
       - name: 📁 Upload Allure Report for Chrome
         uses: actions/upload-artifact@v4

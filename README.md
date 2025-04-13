@@ -27,20 +27,14 @@ Supports cross-browser testing (Electron, Chrome, Firefox).
 
 ```bash
 git clone https://github.com/vadym-usk/cypress-project.git
-cd your-repo
+cd cypress-project
 npm install
 ```
 
 ---
 
 ## 🛠 Environment Setup
-
-#### Create a .env file by copying the example:
-```bash
-cp .env.example .env
-```
-
-Update with your actual environment values:
+#### Create your environment values .env:
 ```bash
 CYPRESS_BASE_URL=https://example.com
 CYPRESS_USER_EMAIL=test@email.com

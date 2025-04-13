@@ -42,20 +42,23 @@ jobs:
             -v ${{ github.workspace }}/allure-results/chrome:/app/allure-results \
             cypress-tests npx cypress run --browser chrome
 
-      - name: 📊 Consolidate Allure results
-        run: |
-          sudo mkdir -p allure-results
-          sudo chmod -R 777 allure-results
-          mkdir -p allure-results/general
-          cp -r allure-results/electron/* allure-results/general/ || true
-          cp -r allure-results/chrome/* allure-results/general/ || true
-
-      - name: 📊 Generate Allure Report
+      - name: 📊 Generate Allure Report for Electron
         run: |
           npm install -g allure-commandline
-          allure generate allure-results/general --clean -o allure-report
+          allure generate allure-results/electron --clean -o allure-report
 
-      - name: 📁 Upload Allure Report
+      - name: 📁 Upload Allure Report for Electron
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report
+
+      - name: 📊 Generate Allure Report for Chrome
+        run: |
+          npm install -g allure-commandline
+          allure generate allure-results/chrome --clean -o allure-report
+
+      - name: 📁 Upload Allure Report for Chrome
         uses: actions/upload-artifact@v4
         with:
           name: allure-report

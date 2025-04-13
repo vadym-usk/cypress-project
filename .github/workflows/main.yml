@@ -44,6 +44,8 @@ jobs:
 
       - name: 📊 Consolidate Allure results
         run: |
+          sudo mkdir -p allure-results
+          sudo chmod -R 777 allure-results
           mkdir -p allure-results/general
           cp -r allure-results/electron/* allure-results/general/ || true
           cp -r allure-results/chrome/* allure-results/general/ || true

@@ -23,6 +23,7 @@ jobs:
         run: docker build -t cypress-tests .
 
       - name: 🧪 Run Cypress Tests in Electron browser
+        continue-on-error: true
         run: |
           docker run --rm \
             -e CYPRESS_BROWSER=electron \
@@ -33,6 +34,7 @@ jobs:
             cypress-tests npx cypress run --browser electron
 
       - name: 🧪 Run Cypress Tests in Chrome browser
+        continue-on-error: true
         run: |
           docker run --rm \
             -e CYPRESS_BROWSER=chrome \

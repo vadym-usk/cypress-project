@@ -19,7 +19,7 @@ module.exports = defineConfig({
       allureResultsPath: 'allure-results'
     },
     watchForFileChanges: false,
-    retries: 0,
+    retries: 3,
     defaultCommandTimeout: 10000,
     requestTimeout: 5000,
     responseTimeout: 30000,

@@ -10,6 +10,7 @@
   },
   "scripts": {
     "cy:run:test": "",
+    "cy:run:test:electron": "npm run clean:allure && CYPRESS_BASE_URL=https://example.com CYPRESS_USER_EMAIL=test@email.com CYPRESS_USER_PASSWORD=password npx cypress run --browser electron && npm run allure:generate && npm run allure:open",
     "cy:run:test:chrome": "npm run clean:allure && CYPRESS_BASE_URL=https://example.com CYPRESS_USER_EMAIL=test@email.com CYPRESS_USER_PASSWORD=password npx cypress run --browser chrome && npm run allure:generate && npm run allure:open",
     "cy:run:test:firefox": "npm run clean:allure && CYPRESS_BASE_URL=https://example.com CYPRESS_USER_EMAIL=test@email.com CYPRESS_USER_PASSWORD=password npx cypress run --browser firefox && npm run allure:generate && npm run allure:open",
     "allure:generate": "allure generate allure-results --clean -o allure-report",

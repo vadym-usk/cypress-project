@@ -12,54 +12,37 @@ jobs:
     permissions:
       contents: write
 
+    strategy:
+      matrix:
+        browser: [electron, chrome]
+
     steps:
       - name: 📥 Checkout code
         uses: actions/checkout@v4
 
       - name: 🧹 Clean previous allure-results
-        run: rm -rf allure-results allure-report
+        run: rm -rf allure-results allure-report*
 
       - name: 🐳 Build Docker Image
         run: docker build -t cypress-tests .
 
-      - name: 🧪 Run Cypress Tests in Electron browser
+      - name: 🧪 Run Cypress Tests in ${{ matrix.browser }} browser
         run: |
           docker run --rm \
-            -e CYPRESS_BROWSER=electron \
+            -e CYPRESS_BROWSER=${{ matrix.browser }} \
             -e CYPRESS_BASE_URL=${{ secrets.CYPRESS_BASE_URL }} \
             -e CYPRESS_USER_EMAIL=${{ secrets.CYPRESS_USER_EMAIL }} \
             -e CYPRESS_USER_PASSWORD=${{ secrets.CYPRESS_USER_PASSWORD }} \
-            -v ${{ github.workspace }}/allure-results/electron:/app/allure-results \
-            cypress-tests npx cypress run --browser electron
+            -v ${{ github.workspace }}/allure-results/${{ matrix.browser }}:/app/allure-results \
+            cypress-tests npx cypress run --browser ${{ matrix.browser }}
 
-      - name: 🧪 Run Cypress Tests in Chrome browser
-        run: |
-          docker run --rm \
-            -e CYPRESS_BROWSER=chrome \
-            -e CYPRESS_BASE_URL=${{ secrets.CYPRESS_BASE_URL }} \
-            -e CYPRESS_USER_EMAIL=${{ secrets.CYPRESS_USER_EMAIL }} \
-            -e CYPRESS_USER_PASSWORD=${{ secrets.CYPRESS_USER_PASSWORD }} \
-            -v ${{ github.workspace }}/allure-results/chrome:/app/allure-results \
-            cypress-tests npx cypress run --browser chrome
-
-      - name: 📊 Generate Allure Report for Electron
+      - name: 📊 Generate Allure Report for ${{ matrix.browser }} browser
         run: |
           npm install -g allure-commandline
-          allure generate allure-results/electron --clean -o allure-report-electron
+          allure generate allure-results/${{ matrix.browser }} --clean -o allure-report-${{ matrix.browser }}
 
-      - name: 📁 Upload Allure Report for Electron
+      - name: 📁 Upload Allure Report for ${{ matrix.browser }} browser
         uses: actions/upload-artifact@v4
         with:
-          name: allure-report-electron
-          path: allure-report-electron
-
-      - name: 📊 Generate Allure Report for Chrome
-        run: |
-          npm install -g allure-commandline
-          allure generate allure-results/chrome --clean -o allure-report-chrome
-
-      - name: 📁 Upload Allure Report for Chrome
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-report-chrome
-          path: allure-report-chrome
+          name: allure-report-${{ matrix.browser }}
+          path: allure-report-${{ matrix.browser }}

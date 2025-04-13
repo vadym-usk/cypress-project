@@ -50,8 +50,8 @@ jobs:
       - name: 📁 Upload Allure Report for Electron
         uses: actions/upload-artifact@v4
         with:
-          name: allure-report
-          path: allure-report
+          name: allure-report-electron
+          path: allure-report-electron
 
       - name: 📊 Generate Allure Report for Chrome
         run: |
@@ -61,5 +61,5 @@ jobs:
       - name: 📁 Upload Allure Report for Chrome
         uses: actions/upload-artifact@v4
         with:
-          name: allure-report
-          path: allure-report
+          name: allure-report-chrome
+          path: allure-report-chrome

@@ -26,13 +26,24 @@ jobs:
       - name: 🐳 Build Docker Image
         run: docker build -t cypress-tests .
 
+      - name: 🔀 Set credentials based on browser
+        id: user
+        run: |
+          if [ "${{ matrix.browser }}" = "electron" ]; then
+            echo "email=${{ secrets.CYPRESS_USER_EMAIL_ELECTRON }}" >> $GITHUB_OUTPUT
+            echo "password=${{ secrets.CYPRESS_USER_PASSWORD_ELECTRON }}" >> $GITHUB_OUTPUT
+          elif [ "${{ matrix.browser }}" = "chrome" ]; then
+            echo "email=${{ secrets.CYPRESS_USER_EMAIL_CHROME }}" >> $GITHUB_OUTPUT
+            echo "password=${{ secrets.CYPRESS_USER_PASSWORD_CHROME }}" >> $GITHUB_OUTPUT
+          fi
+
       - name: 🧪 Run Cypress Tests in ${{ matrix.browser }} browser
         run: |
           docker run --rm \
             -e CYPRESS_BROWSER=${{ matrix.browser }} \
             -e CYPRESS_BASE_URL=${{ secrets.CYPRESS_BASE_URL }} \
-            -e CYPRESS_USER_EMAIL=${{ secrets.CYPRESS_USER_EMAIL }} \
-            -e CYPRESS_USER_PASSWORD=${{ secrets.CYPRESS_USER_PASSWORD }} \
+            -e CYPRESS_USER_EMAIL=${{ steps.user.outputs.email }} \
+            -e CYPRESS_USER_PASSWORD=${{ steps.user.outputs.password }} \
             -v ${{ github.workspace }}/allure-results/${{ matrix.browser }}:/app/allure-results \
             cypress-tests npx cypress run --browser ${{ matrix.browser }}
 

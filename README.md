@@ -3,6 +3,7 @@
 ![CI](https://github.com/vadym-usk/cypress-project/actions/workflows/main.yml/badge.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)
 ![Cypress](https://img.shields.io/badge/Cypress-14.2.1-blue)
+![License: None](https://img.shields.io/badge/license-none-lightgrey)
 
 Demostration of automated UI and API testing for the project using https://www.cypress.io/.  
 Tests run in Docker containers and in CI via GitHub Actions with Allure reporting support.  
@@ -158,4 +159,4 @@ Vadym – QA Engineer
 ---
 
 ## 📝 License
-–
+No license. All rights reserved.

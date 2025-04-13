@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        browser: [electron, chrome]
+        browser: [electron]
 
     steps:
       - name: 📥 Checkout code

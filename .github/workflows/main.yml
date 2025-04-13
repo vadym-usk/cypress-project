@@ -29,7 +29,7 @@ jobs:
             -e CYPRESS_BASE_URL=${{ secrets.CYPRESS_BASE_URL }} \
             -e CYPRESS_USER_EMAIL=${{ secrets.CYPRESS_USER_EMAIL }} \
             -e CYPRESS_USER_PASSWORD=${{ secrets.CYPRESS_USER_PASSWORD }} \
-            -v ${{ github.workspace }}/allure-results:/app/allure-results \
+            -v ${{ github.workspace }}/allure-results/electron:/app/allure-results \
             cypress-tests npx cypress run --browser electron
 
       - name: 🧪 Run Cypress Tests in Chrome browser
@@ -39,13 +39,19 @@ jobs:
             -e CYPRESS_BASE_URL=${{ secrets.CYPRESS_BASE_URL }} \
             -e CYPRESS_USER_EMAIL=${{ secrets.CYPRESS_USER_EMAIL }} \
             -e CYPRESS_USER_PASSWORD=${{ secrets.CYPRESS_USER_PASSWORD }} \
-            -v ${{ github.workspace }}/allure-results:/app/allure-results \
+            -v ${{ github.workspace }}/allure-results/chrome:/app/allure-results \
             cypress-tests npx cypress run --browser chrome
+
+      - name: 📊 Consolidate Allure results
+        run: |
+          mkdir -p allure-results/general
+          cp -r allure-results/electron/* allure-results/general/ || true
+          cp -r allure-results/chrome/* allure-results/general/ || true
 
       - name: 📊 Generate Allure Report
         run: |
           npm install -g allure-commandline
-          allure generate allure-results --clean -o allure-report
+          allure generate allure-results/combined --clean -o allure-report
 
       - name: 📁 Upload Allure Report
         uses: actions/upload-artifact@v4

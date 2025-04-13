@@ -154,7 +154,7 @@ After each CI run:
 ---
 
 ## 👤 Author
-Vadym – QA Engineer
+**Vadym** – [@your-github-username](https://github.com/vadym-usk)
 
 ---
 

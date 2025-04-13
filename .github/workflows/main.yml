@@ -22,7 +22,7 @@ jobs:
       - name: 🐳 Build Docker Image
         run: docker build -t cypress-tests .
 
-      - name: 🧪 Run Cypress in Electron
+      - name: 🧪 Run Cypress Tests in Electron browser
         run: |
           docker run --rm \
             -e CYPRESS_BROWSER=electron \
@@ -30,9 +30,9 @@ jobs:
             -e CYPRESS_USER_EMAIL=${{ secrets.CYPRESS_USER_EMAIL }} \
             -e CYPRESS_USER_PASSWORD=${{ secrets.CYPRESS_USER_PASSWORD }} \
             -v ${{ github.workspace }}/allure-results:/app/allure-results \
-            cypress-tests --browser electron
+            cypress-tests npx cypress run --browser electron
 
-      - name: 🧪 Run Cypress Tests in Chrome
+      - name: 🧪 Run Cypress Tests in Chrome browser
         run: |
           docker run --rm \
             -e CYPRESS_BROWSER=chrome \
@@ -40,7 +40,7 @@ jobs:
             -e CYPRESS_USER_EMAIL=${{ secrets.CYPRESS_USER_EMAIL }} \
             -e CYPRESS_USER_PASSWORD=${{ secrets.CYPRESS_USER_PASSWORD }} \
             -v ${{ github.workspace }}/allure-results:/app/allure-results \
-            cypress-tests --browser chrome
+            cypress-tests npx cypress run --browser chrome
 
       - name: 📊 Generate Allure Report
         run: |

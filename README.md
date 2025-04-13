@@ -2,7 +2,7 @@
 
 Demostration of automated UI and API testing for the project using https://www.cypress.io/.  
 Tests run in Docker containers and in CI via GitHub Actions with Allure reporting support.  
-Supports cross-browser testing (Chrome, Electron).
+Supports cross-browser testing (Electron, Chrome, Firefox).
 
 ---
 

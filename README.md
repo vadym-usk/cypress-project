@@ -3,12 +3,12 @@
 ![CI](https://github.com/vadym-usk/cypress-project/actions/workflows/main.yml/badge.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)
 ![Cypress](https://img.shields.io/badge/Cypress-14.2.1-blue)
+[![Dockerized](https://img.shields.io/badge/Docker-Supported-blue?logo=docker)](https://hub.docker.com/)
 ![License: None](https://img.shields.io/badge/license-none-lightgrey)
 
 Demostration of automated UI and API testing for the project using https://www.cypress.io/.  
 Tests run in Docker containers and in CI via GitHub Actions with Allure reporting support.  
 Supports cross-browser testing (Electron, Chrome, Firefox).
-
 
 ---
 
@@ -16,7 +16,7 @@ Supports cross-browser testing (Electron, Chrome, Firefox).
 
 - ✅ UI and API test automation with Cypress
 - 🐳 Docker-based test execution
-- 🧪 Parallel testing in browsers
+- 🚀 Parallel testing in browsers
 - 📊 Allure Report integration
 - 🔁 CI pipeline using GitHub Actions
 - 🔐 Environment variable support via `.env`
@@ -34,6 +34,11 @@ npm install
 ---
 
 ## 🛠 Environment Setup
+#### Copy .env.example and create your own .env file:
+```bash
+cp .env.example .env
+```
+
 #### Create your environment values .env:
 ```bash
 CYPRESS_BASE_URL=https://example.com
@@ -44,7 +49,7 @@ CYPRESS_USER_PASSWORD=password
 
 ---
 
-## 🧪 Running Tests Locally
+## 🚀 Running Tests Locally
 #### Run all tests in Electron (default):
 ```bash
 npx cypress run
@@ -108,11 +113,11 @@ You’ll need to define the following secrets in your GitHub repository:
 ```bash
 CYPRESS_BASE_URL
 
-CYPRESS_USER_EMAIL_CHROME
-CYPRESS_USER_PASSWORD_CHROME
-
 CYPRESS_USER_EMAIL_ELECTRON
 CYPRESS_USER_PASSWORD_ELECTRON
+
+CYPRESS_USER_EMAIL_CHROME
+CYPRESS_USER_PASSWORD_CHROME
 ```
 These are injected into Docker containers during Cypress test runs.
 

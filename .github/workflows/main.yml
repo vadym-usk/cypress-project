@@ -38,7 +38,7 @@ jobs:
             echo "password=${{ secrets.CYPRESS_USER_PASSWORD_CHROME }}" >> $GITHUB_OUTPUT
           fi
 
-      - name: 🧪 Run Cypress Tests in ${{ matrix.browser }} browser
+      - name: 🚀 Run Cypress Tests in ${{ matrix.browser }} browser
         run: |
           docker run --rm \
             -e CYPRESS_BROWSER=${{ matrix.browser }} \

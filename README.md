@@ -125,20 +125,22 @@ These are injected into Docker containers during Cypress test runs.
 
 ## 🧱 Project Structure
 ```bash
-.
+cypress-project/
 ├── .github/
-│    └── workflows/
-│        └── main.yml
+│    ├── workflows/
+│    │   └── main.yml
+│
 ├── cypress/
-│   └── fixtures/
-│   └── support/
-│       └── page-objects/
-│           └── GaragePage.js
-│   └── tests/
-│       └── e2e/
-│           └── garage/
-│               └── garage.cy.js
-│   └── support/
+│   ├── fixtures/
+│   ├── support/
+│   │   └── page-objects/
+│   │       └── GaragePage.js
+│
+│   ├── tests/
+│   │   └── e2e/
+│   │       └── garage/
+│   │           └── garage.cy.js
+│
 ├── .dockerignore
 ├── .env.example
 ├── .gitignore

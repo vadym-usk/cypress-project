@@ -1,6 +1,8 @@
-import { garagePage } from '../../pages/garagePage';
-import { fuelExpensesPage } from '../../pages/fuelExpensesPage';
+import GaragePage from '../../../support/page-objects/GaragePage';
+import FuelExpensesPage from '../../../support/page-objects/FuelExpensesPage';
 
+const garagePage = new GaragePage();
+const fuelExpensesPage = new FuelExpensesPage();
 let currentDateFormatted;
 
 beforeEach(() => {

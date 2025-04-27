@@ -1,4 +1,4 @@
-class FuelExpensesPage {
+export default class FuelExpensesPage {
     static url = '/panel/expenses';
 
     elements = {
@@ -24,5 +24,3 @@ class FuelExpensesPage {
         return this;
     }
 }
-
-export const fuelExpensesPage = new FuelExpensesPage();

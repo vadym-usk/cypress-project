@@ -1,5 +1,8 @@
-import { homePage } from '../../pages/homePage';
-import { registrationPopup } from '../../pages/registrationPopup';
+import HomePage from '../../../support/page-objects/HomePage';
+import RegistrationPopup from '../../../support/page-objects/RegistrationPopup';
+
+const homePage = new HomePage();
+const registrationPopup = new RegistrationPopup();
 
 beforeEach(function () {
     const timestamp = Date.now();

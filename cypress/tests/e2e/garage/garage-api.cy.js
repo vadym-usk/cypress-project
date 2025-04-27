@@ -1,5 +1,6 @@
-import { garagePage } from '../../pages/garagePage';
+import GaragePage from '../../../support/page-objects/GaragePage';
 
+const garagePage = new GaragePage();
 let currentDateISO;
 
 beforeEach(() => {

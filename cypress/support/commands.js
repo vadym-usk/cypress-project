@@ -1,5 +1,8 @@
-import { loginPopup } from '../pages/loginPopup';
-import { homePage } from '../pages/homePage';
+import LoginPopup from '../support/page-objects/LoginPopup';
+import HomePage from '../support/page-objects/HomePage';
+
+const loginPopup = new LoginPopup();
+const homePage = new HomePage();
 
 Cypress.Commands.add('resetSession', () => {
   cy.clearCookies();

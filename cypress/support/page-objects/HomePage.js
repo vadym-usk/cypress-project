@@ -1,4 +1,4 @@
-class HomePage {
+export default class HomePage {
     elements = {
         header: {
             logo: () => cy.get('a.header_logo'),
@@ -38,5 +38,3 @@ class HomePage {
         return this;
     }
 }
-
-export const homePage = new HomePage();

@@ -1,4 +1,4 @@
-class GaragePage {
+export default class GaragePage {
     static url = '/panel/garage';
 
     elements = {
@@ -122,5 +122,3 @@ class GaragePage {
         this.elements.editCarPopup.removeCarPopup.removeButton().filter((_, el) => el.textContent.trim() === 'Remove').click();
     }
 }
-
-export const garagePage = new GaragePage();

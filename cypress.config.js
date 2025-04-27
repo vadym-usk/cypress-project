@@ -1,7 +1,7 @@
 const { defineConfig } = require("cypress");
 require('dotenv').config();
 const allureWriter = require('@shelex/cypress-allure-plugin/writer');
-const qautoFixtures = require('./cypress/fixtures/qautoFixtures.json');
+const qautoFixtures = require('./cypress/fixtures/qauto-fixtures.json');
 
 module.exports = defineConfig({
   e2e: {
@@ -18,6 +18,7 @@ module.exports = defineConfig({
       allure: true,
       allureResultsPath: 'allure-results'
     },
+    specPattern: 'cypress/tests/**/*.cy.{js,ts}',
     watchForFileChanges: false,
     retries: 3,
     defaultCommandTimeout: 10000,

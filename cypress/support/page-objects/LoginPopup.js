@@ -1,4 +1,4 @@
-class LoginPopup {
+export default class LoginPopup {
     elements = {
         loginTitle: () => cy.get('h4.modal-title'),
         emailInputField: () => cy.get('#signinEmail'),
@@ -26,5 +26,3 @@ class LoginPopup {
         return this;
     }
 }
-
-export const loginPopup = new LoginPopup();

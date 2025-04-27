@@ -1,4 +1,6 @@
-import { homePage } from '../../pages/homePage';
+import HomePage from '../../../support/page-objects/HomePage';
+
+const homePage = new HomePage();
 
 beforeEach(() => {
     cy.visit('/');

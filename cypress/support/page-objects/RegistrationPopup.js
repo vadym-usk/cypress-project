@@ -1,4 +1,4 @@
-class RegistrationPopup {
+export default class RegistrationPopup {
     elements = {
         registrationTitle: () => cy.get('h4.modal-title'),
         nameInputField: () => cy.get('#signupName'),
@@ -49,5 +49,3 @@ class RegistrationPopup {
         return this;
     }
 }
-
-export const registrationPopup = new RegistrationPopup();
